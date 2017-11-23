@@ -4,17 +4,24 @@ $(document).ready(() => {
 
   $("#login-button").click(() => {
 
-    const email = $("#inputEmail").val();
+    const username = $("#inputUsername").val();
     const password = $("#inputPassword").val();
 
-    SDK.User.login(email, password, (err, data) => {
+    SDK.User.login(username, password, (err, data) => {
       if (err && err.xhr.status === 401) {
         $(".form-group").addClass("has-error");
       }
       else if (err){
         console.log("BAd stuff happened")
       } else {
-        window.location.href = "my-page.html";
+
+        if(data.type === 1) {
+          window.location.href = "user-page.html"
+        } else {
+          window.location.href = "admin-page.html"
+            console.log(data)
+        }
+
       }
     });
 

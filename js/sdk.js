@@ -108,20 +108,19 @@ const SDK = {
       SDK.Storage.remove("user");
       window.location.href = "index.html";
     },
-    login: (email, password, cb) => {
+    login: (username, password, cb) => {
       SDK.request({
         data: {
-          email: email,
+          username: username,
           password: password
         },
-        url: "/users/login?include=user",
+        url: "/user/login",
         method: "POST"
       }, (err, data) => {
 
         //On login-error
         if (err) return cb(err);
 
-        SDK.Storage.persist("tokenId", data.id);
         SDK.Storage.persist("userId", data.userId);
         SDK.Storage.persist("user", data.user);
 
