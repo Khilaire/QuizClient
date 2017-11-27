@@ -145,7 +145,6 @@ const SDK = {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
-            <li><a href="my-page.html">Your orders</a></li>
             <li><a href="#" id="logout-link">Logout</a></li>
           `);
                 } else {
