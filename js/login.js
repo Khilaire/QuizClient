@@ -13,13 +13,13 @@ $(document).ready(() => {
                 $(".form-group").addClass("has-error");
             }
             else if (err){
-                console.log("Something wrong happened")
+                console.log("Something went wrong")
             } else {
 
-                if(data.type === 1) {
-                    window.location.href = "user-page.html"
-                } else {
+                if(data.type === 0) {
                     window.location.href = "admin-page.html"
+                } else {
+                    window.location.href = "user-page.html"
                     console.log(data)
                 }
 

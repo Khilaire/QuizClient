@@ -1,5 +1,6 @@
 const SDK = {
     serverURL: "http://localhost:9090/api",
+
     request: (options, cb) => {
 
         let headers = {};
@@ -27,7 +28,7 @@ const SDK = {
     },
 
     // Ændre til question?
-    Book: {
+   /* Book: {
         addToBasket: (book) => {
             let basket = SDK.Storage.load("basket");
 
@@ -80,7 +81,29 @@ const SDK = {
             SDK.request({method: "GET", url: "/authors"}, cb);
         }
     },
-    Order: {
+*/
+
+   // Quiz -> Questions -> options
+
+    // Opret quiz (inspireret af "Order fra Jesper XYZ's eksempel fra øvelsestime")
+    Quiz: {
+        create: (data, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/quiz",
+                data: data,
+            }, cb);
+        },
+
+        findByID: (cb) => {
+            SDK.request({
+                method: "GET",
+                url: "/quiz/" + id,
+            }, cb);
+        }
+    },
+
+ /*   Order: {
         create: (data, cb) => {
             SDK.request({
                 method: "POST",
@@ -99,7 +122,7 @@ const SDK = {
                 }
             }, cb);
         }
-    },
+    },*/
 
     // Bruger
     User: {
