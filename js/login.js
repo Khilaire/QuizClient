@@ -17,9 +17,9 @@ $(document).ready(() => {
             } else {
 
                 if(data.type === 0) {
-                    window.location.href = "admin-page.html"
+                    window.location.href = "../adminPage.html"
                 } else {
-                    window.location.href = "user-page.html"
+                    window.location.href = "../defaultPage.html"
                     console.log(data)
                 }
 

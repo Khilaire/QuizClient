@@ -172,7 +172,7 @@ const SDK = {
           `);
                 } else {
                     $(".navbar-right").html(`
-            <li><a href="login.html">Login <span class="sr-only">(current)</span></a></li>
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
           `);
                 }
                 $("#logout-link").click(() => SDK.User.logOut());
