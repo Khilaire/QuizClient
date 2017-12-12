@@ -19,7 +19,7 @@ $(document).ready(() => {
                 if(data.type === 0) {
                     window.location.href = "../adminPage.html"
                 } else {
-                    window.location.href = "../defaultPage.html"
+                    window.location.href = "../index.html"
                     console.log(data)
                 }
 
