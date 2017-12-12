@@ -16,6 +16,7 @@ $(document).ready(() => {
                 console.log("Something went wrong")
             } else {
 
+                // Hvis type er 0, refereres der til en admin-bruger, mens der ved type 1 refereres til en almindelig bruger
                 if(data.type === 0) {
                     window.location.href = "../adminPage.html"
                 } else {

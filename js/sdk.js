@@ -124,7 +124,7 @@ const SDK = {
         }
     },*/
 
-    // Bruger
+    // Funktioner tilknyttet en 'bruger' (find alle, login, log ud)
     User: {
         // Find alle
         findAll: (cb) => {
