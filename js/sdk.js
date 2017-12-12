@@ -124,22 +124,40 @@ const SDK = {
         }
     },*/
 
-    // Funktioner tilknyttet en 'bruger' (find alle, login, log ud)
+    // Alle funktioner tilknyttet en 'bruger'
     User: {
-        // Find alle
+
+        // Find alle brugere
         findAll: (cb) => {
             SDK.request({method: "GET", url: "/staffs"}, cb);
         },
         current: () => {
             return SDK.Storage.load("user");
         },
-        // Log ud
+
+        // Opret ny bruger
+        createUser: (firstName, surname, username, password, type, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/user/",
+                data: {
+                    firstName: firstName,
+                    surname: surname,
+                    username: username,
+                    password: password,
+                    type: type,
+                }
+            }, cb);
+        },
+
+        // Log ud fra den nuværende session
         logOut: () => {
             SDK.Storage.remove("tokenId");
             SDK.Storage.remove("userId");
             SDK.Storage.remove("user");
             window.location.href = "index.html";
         },
+
         // Login
         login: (username, password, cb) => {
             SDK.request({
