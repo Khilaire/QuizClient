@@ -142,7 +142,7 @@ const SDK = {
                 url: "/user/",
                 data: {
                     firstName: firstName,
-                    surname: surname,
+                    lastName: surname,
                     username: username,
                     password: password,
                     type: type,
