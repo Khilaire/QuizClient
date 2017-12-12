@@ -2,7 +2,7 @@ $(document).ready(() => {
 
     SDK.User.loadNav();
 
-    $("#createUser").click(() => {
+    $("#createUserbtn").click(() => {
 
         const firstName = $("#inputName").val();
         const surname = $("#inputSurname").val();
@@ -15,13 +15,14 @@ $(document).ready(() => {
             console.log(firstName + surname + username + password + type);
 
             if (err) {
-                console.log("Something went wrong")
+                console.log("Der er sket en fejl!")
                 console.log(data)
             }
             else {
                 if (!username || !password){
                     window.alert("Indtast venligst brugernavn og kodeord")
                 }
+
                 else {
                     alert("Succes! Din bruger er blevet oprettet")
                     window.location.href = ("loginPage.html");
