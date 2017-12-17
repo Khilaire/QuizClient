@@ -95,10 +95,14 @@ const SDK = {
             }, cb);
         },
 
-        findByID: (cb) => {
+        currentQuiz: () => {
+            return SDK.Storage.load("quizId");
+        },
+
+        findById: (id, cb) => {
             SDK.request({
                 method: "GET",
-                url: "/quiz/" + id,
+                url: "/quiz" + "/" + id,
             }, cb);
         }
     },
@@ -129,7 +133,7 @@ const SDK = {
 
         // Find alle brugere
         findAll: (cb) => {
-            SDK.request({method: "GET", url: "/staffs"}, cb);
+            SDK.request({method: "GET", url: "/user"}, cb);
         },
         current: () => {
             return SDK.Storage.load("user");
@@ -186,7 +190,8 @@ const SDK = {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
-            <li><a href="#" id="logout-link">Logout</a></li>
+            <li><a href="defaultPage.html" id="defaultHome">Hjem</a></li>
+            <li><a href="index.html" id="logout-link">Logout</a></li>
           `);
                 } else {
                     $(".navbar-right").html(`

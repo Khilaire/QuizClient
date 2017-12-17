@@ -10,11 +10,10 @@ $(document).ready(() => {
         const password = $("#inputPassword").val();
         const type = 1; // man kan kun oprette en admin (type 0) såfremt man selv er logget ind som admin. Derfor er type per default altid 1.
 
+        // Oprettelse af en ny bruger
         SDK.User.createUser(firstName, surname, username, password, type, (err, data) => {
 
-            console.log(firstName + surname + username + password + type);
-
-            if (err) {
+            if (err && err.xhr.status === 401) {
                 console.log("Der er sket en fejl!")
                 console.log(data)
             }
@@ -24,7 +23,7 @@ $(document).ready(() => {
                 }
 
                 else {
-                    alert("Succes! Din bruger er blevet oprettet")
+                    alert("Tillykke " + firstName + "! Din bruger er blevet oprettet")
                     window.location.href = ("loginPage.html");
                 }
             }
