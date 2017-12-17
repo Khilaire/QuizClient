@@ -1,6 +1,24 @@
 const SDK = {
+
+    // Hentet fra: https://developer.salesforce.com/forums/?id=906F0000000g1blIAA
+    getQueryParam: (sParam) => {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    },
+
     serverURL: "http://localhost:9090/api",
 
+    // SDK request
     request: (options, cb) => {
 
         let headers = {};
@@ -86,8 +104,8 @@ const SDK = {
    // Quiz -> Questions -> options
 
     // Opret quiz (inspireret af "Order fra Jesper XYZ's eksempel fra øvelsestime")
-    Quiz: {
-        create: (data, cb) => {
+    /* Quiz: {
+        createQuiz: (data, cb) => {
             SDK.request({
                 method: "POST",
                 url: "/quiz",
@@ -104,8 +122,124 @@ const SDK = {
                 method: "GET",
                 url: "/quiz" + "/" + id,
             }, cb);
+        },
+
+        loadQuestions: (callback) =>{
+            //Loading the selected quiz's id from local storage
+            const selectedQuiz = SDK.Storage.load("selectedQuiz");
+            const quizId = selectedQuiz.quizId;
+
+            SDK.request({
+                method: "GET",
+                url: "/question/" + quizId,
+                headers: {
+                    //Header for authorization in server
+                    authorization: SDK.Storage.load("myToken"),
+                },
+            }, (err, data) => {
+                if (err) return callback(err);
+                callback(null, data);
+            });
+        },
+    },
+    */
+    Quiz: {
+        createQuiz: (courseId, quizTitle, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/quiz",
+                data: {
+                    courseId: courseId,
+                    quizTitle: quizTitle,
+                },
+            }, (err, data) => {
+
+                //On login-error
+                if (err) return cb(err);
+                console.log(err);
+
+                SDK.Storage.persist("courseId", data.courseId);
+                SDK.Storage.persist("quizTitle", data.quizTitle);
+
+                cb(null, data);
+            });
+        },
+
+
+        createQuestion: (quizId, questionTitle, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/question",
+                data: {
+                    quizId: quizId,
+                    questionTitle: questionTitle,
+                },
+            }, (err, data) => {
+
+                //On login-error
+                if (err) return cb(err);
+                console.log(err);
+
+                //SDK.Storage.persist("questionId", data.courseId);
+                //SDK.Storage.persist("questionTitle", data.questionTitle);
+
+                cb(null, data);
+            });
+        },
+
+        createChoice: (questionId, choiceTitle, answer, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/choice",
+                data: {
+                    questionId: questionId,
+                    choiceTitle: choiceTitle,
+                    answer: answer,
+                },
+            }, (err, data) => {
+
+                //On login-error
+                if (err) return cb(err);
+                console.log(err);
+
+                //SDK.Storage.persist("questionId", data.courseId);
+                //SDK.Storage.persist("questionTitle", data.questionTitle);
+
+                cb(null, data);
+            });
+        },
+
+
+        currentQuiz: () => {
+            return SDK.Storage.load("quizId");
+        },
+
+        findById: (id, cb) => {
+            SDK.request({
+                method: "GET",
+                url: "/quiz" + "/" + id,
+            }, cb);
         }
     },
+    deleteQuiz: (quizId, cb) => {
+        //Loading the selected course's id from local storage
+        //const selectedQuiz = SDK.Storage.load("selectedQuiz")
+        //const quizId = selectedQuiz.quizId;
+
+        SDK.request({
+            method: "DELETE",
+            url: "/quiz" + "/" + quizId,
+
+
+        }, (err, data) => {
+            if (err) return cb(err);
+            cb(null, data)
+        });
+    },
+
+
+
+
 
  /*   Order: {
         create: (data, cb) => {
@@ -130,7 +264,6 @@ const SDK = {
 
     // Alle funktioner tilknyttet en 'bruger'
     User: {
-
         // Find alle brugere
         findAll: (cb) => {
             SDK.request({method: "GET", url: "/user"}, cb);
@@ -195,7 +328,9 @@ const SDK = {
           `);
                 } else {
                     $(".navbar-right").html(`
+            <li><a href="index.html" id="home">Hjem</a></li>
             <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+            
           `);
                 }
                 $("#logout-link").click(() => SDK.User.logOut());

@@ -1,10 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
     <meta charset="UTF-8">
-    <title>admin page</title>
+    <title>Default Page</title>
+
 </head>
 <body>
-    <p>admin page</p>
+
+<div class="container">
+
+    <div class="row" id="nav-container"></div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Standard Jumbotron-tema benyttes af hensyn til consistency-->
+            <div class="jumbotron">
+                <h3 class="control-label" id="currentUser">Velkommen, du er logget ind som ADMINISTATOR</h3>
+                <div class="contentArea">
+                    <div class="defaultWelcometxt" id="defaultWelcometxt">
+                        <p>Du har nu følgende muligheder?</p>
+                    </div>
+
+                    <div class="courseSelection">
+                        <button type="button" class="btn-primary courseSelection" id="signup" data-toggle="modal"
+                                data-target="#admModal">Opret administrator
+                        </button>
+                        <button type="button" class="btn-primary courseSelection" id="itf-button" data-toggle="modal"
+                                data-target="#createQuizModal">Opret quiz
+                        </button>
+                        <button type="button" class="btn-primary courseSelection" id="mak-button" data-toggle="modal"
+                                data-target="#makModal">Se alle brugere
+                        </button>
+                        <button type="button" class="btn-primary courseSelection" id="fin-button" data-toggle="modal"
+                                data-target="#finModal">Se alle quizzes
+                        </button>
+                        <button type="button" class="btn-primary courseSelection" id="tes-button" data-toggle="modal"
+                                data-target="#finModal">Slet quiz
+                        </button>
+                        <button type="button" class="btn-primary courseSelection" id="ted-button" data-toggle="modal"
+                                data-target="#finModal">Tilgå quiz
+                        </button>
+
+                        <!-- Modal for oprettelse af administrator-->
+                        <div class="modal fade" id="admModal" tabindex="-1" role="dialog"
+                             aria-labelledby="signupAdmModalTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="signupAdmModalHeading">Opret administrator</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputName">Fornavn</label>
+                                                    <input type="firstName" class="form-control" id="inputName"
+                                                           placeholder="Fornavn">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputSurname">Efternavn</label>
+                                                    <input type="surName" class="form-control" id="inputSurname"
+                                                           placeholder="Efternavn">
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputUsername">Brugernavn</label>
+                                                    <input type="username" class="form-control" id="inputUsername"
+                                                           placeholder="Brugernavn">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputPassword">Kodeord</label>
+                                                    <input type="password" class="form-control" id="inputPassword"
+                                                           placeholder="Kodeord">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="text-info">
+                                                    <label class="text-info">
+                                                        Fun fact:<br>Man bruger i gennemsnit 12 uger af sit liv på at
+                                                        vente på, at trafiklys skifter til grønt.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" id="createAdmbtn">Opret
+                                            administrator
+                                        </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal for oprettelse af quiz-->
+                        <div class="modal fade" id="createQuizModal" tabindex="-1" role="dialog"
+                             aria-labelledby="createQuizModalTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title" id="createQuizModalHeading">Opret quiz</h3>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputName">Navngiv quiz</label>
+                                                    <input type="quizTitle" class="form-control" id="inputQuizTitle"
+                                                           placeholder="Titel">
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label">Hvilket fag skal quizzen kobles til?
+                                                    </label><br>
+                                                    <!--- Dropdown til valg af fag -->
+                                                    <select class="inputSelectCourse">
+                                                        <option selected>Vælg fag</option>
+                                                        <option value=1>Distribuerede Systemer</option>
+                                                        <option value=2>IT Forandringsledelse</option>
+                                                        <option value=3>Makroøkonomi</option>
+                                                        <option value=4>VØS(3) - Finansiering</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" id="createQuizBtn">Opret quiz
+                                        </button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<footer class="footer">
+    <div class="container" align="center">
+        <p class="text-muted">2017 - Eksamensprojekt i faget, Distribuerede Systemer.</p>
+    </div>
+</footer>
+
+<script src="lib/js/jquery-3.2.1.js"></script>
+<script src="lib/js/bootstrap.js"></script>
+<script src="js/sdk.js"></script>
+<script src="js/defaultPage.js"></script>
+<script src="js/signup.js"></script>
+<script src="js/adminPage.js"></script>
+<script>
+    SDK.User.loadNav();
+</script>
+
 </body>
 </html>
