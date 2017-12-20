@@ -91,7 +91,7 @@
                             </div>
                         </div>
 
-                        <!-- Modal for oprettelse af quiz-->
+                        <!-- Modal for oprettelse af quiz, spørgsmål, muligheder og svar-->
                         <div class="modal fade" id="createQuizModal" tabindex="-1" role="dialog"
                              aria-labelledby="createQuizModalTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -107,7 +107,7 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label" for="inputName">Navngiv quiz</label>
-                                                    <input type="quizTitle" class="form-control" id="inputQuizTitle"
+                                                    <input type="text" class="form-control" id="inputQuizTitle"
                                                            placeholder="Titel">
                                                 </div>
                                                 <div class="form-group col-md-6">
@@ -121,6 +121,11 @@
                                                         <option value=3>Makroøkonomi</option>
                                                         <option value=4>VØS(3) - Finansiering</option>
                                                     </select>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label" for="inputName">Angiv spørgsmål</label>
+                                                    <input type="text" class="form-control" id="inputQuizQuestion"
+                                                           placeholder="Spørgsmål">
                                                 </div>
                                             </div>
                                         </form>
