@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <meta charset="UTF-8">
+    <title>Opret quiz</title>
+
+</head>
+<body>
+<div class="container">
+    <div class="row" id="nav-container"></div>
+    <div class="row">
+        <div class="col-lg-12" >
+            <div class="jumbotron">
+                <h4>For at oprette en ny quiz skal du igennem følgende trin:</h4>
+                <h5>1) Opret quiz<br>
+                    <b>2) Opret spørgsmål</b><br>
+                    3) Opret svarmuligheder<br>
+                    4) Færdig</h5> <br>
+
+                <h4><b>Indtast spørgsmål</b></h4>
+                <input type="text" class="form-control" placeholder="Angiv spørgsmål" id="inputQuestion" aria-describedby="sizing-addon1">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="quizCnl" >Annuller</button>
+                    <button type="button" class="btn btn-primary" id="questionCrt" >Fortsæt</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../lib/js/jquery-3.2.1.js"></script>
+<script src="../lib/js/bootstrap.js"></script>
+<script src="../js/sdk.js"></script>
+<script src="../js/adminPage.js"></script>
+<script src="../js/quizManagement.js"></script>
+<script>
+    SDK.User.loadNavAdmin();
+</script>
+
+</body>
+</html>

@@ -1,9 +1,8 @@
 $(document).ready(() => {
 
     SDK.User.loadNavAdmin();
-    let quizTitle = $("#inputQuizTitle").val();
-    let courseId = $(".inputSelectCourse").find("option:selected").val();
-    let quizId = SDK.getQueryParam("quizId");
+    const quizTitle = $("#inputQuizTitle").val();
+    const courseId = $(".inputSelectCourse").find("option:selected").val();
 
     // Opret ny quiz
     $("#createQuizBtn").click(() => {

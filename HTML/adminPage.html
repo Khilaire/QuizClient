@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 
-    <link rel="stylesheet" href="lib/css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="../lib/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/main.css">
 
     <meta charset="UTF-8">
     <title>Default Page</title>
@@ -22,15 +23,12 @@
                 <h3>Velkommen, Mark!</h3>
                 <div class="contentArea">
                     <div class="defaultWelcometxt" id="defaultWelcometxt">
-                        <p>Du har nu følgende muligheder</p>
+                        <p>Du kan her oprette nye administrator-konti.</p>
                     </div>
 
                     <div class="courseSelection">
                         <button type="button" class="btn-primary courseSelection" id="ca-button" data-toggle="modal"
                                 data-target="#admModal">Opret ny administrator
-                        </button>
-                        <button type="button" class="btn-primary courseSelection" id="cq-button" data-toggle="modal"
-                                data-target="#createQuizModal">Opret ny quiz
                         </button>
 
                         <!-- Modal for oprettelse af administrator-->
@@ -90,55 +88,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Modal for oprettelse af quiz, spørgsmål, muligheder og svar-->
-                        <div class="modal fade" id="createQuizModal" tabindex="-1" role="dialog"
-                             aria-labelledby="createQuizModalTitle" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title" id="createQuizModalHeading">Opret quiz</h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label" for="inputName">Navngiv quiz</label>
-                                                    <input type="text" class="form-control" id="inputQuizTitle"
-                                                           placeholder="Titel">
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label">Hvilket fag skal quizzen kobles til?
-                                                    </label><br>
-                                                    <!--- Dropdown til valg af fag -->
-                                                    <select class="inputSelectCourse">
-                                                        <option selected>Vælg fag</option>
-                                                        <option value=1>Distribuerede Systemer</option>
-                                                        <option value=2>IT Forandringsledelse</option>
-                                                        <option value=3>Makroøkonomi</option>
-                                                        <option value=4>VØS(3) - Finansiering</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label class="control-label" for="inputName">Angiv spørgsmål</label>
-                                                    <input type="text" class="form-control" id="inputQuizQuestion"
-                                                           placeholder="Spørgsmål">
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" id="createQuizBtn">Opret quiz</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -153,12 +103,12 @@
     </div>
 </footer>
 
-<script src="lib/js/jquery-3.2.1.js"></script>
-<script src="lib/js/bootstrap.js"></script>
-<script src="js/sdk.js"></script>
-<script src="js/defaultPage.js"></script>
-<script src="js/signup.js"></script>
-<script src="js/adminPage.js"></script>
+<script src="../lib/js/jquery-3.2.1.js"></script>
+<script src="../lib/js/bootstrap.js"></script>
+<script src="../js/sdk.js"></script>
+<script src="../js/defaultPage.js"></script>
+<script src="../js/signup.js"></script>
+<script src="../js/adminPage.js"></script>
 <script>
     SDK.User.loadNavAdmin();
 </script>

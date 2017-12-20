@@ -71,7 +71,7 @@ const SDK = {
 
             SDK.Storage.remove("userId");
             SDK.Storage.remove("user");
-            window.location.href = "index.html";
+            window.location.href = "../HTML/index.html";
         },
 
         login: (username, password, cb) => {
@@ -94,7 +94,7 @@ const SDK = {
         },
 
         loadNavNon: (cb) => {
-            $("#nav-container").load("nonMenu.html", () => {
+            $("#nav-container").load("../HTML/Navigation/nonMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -113,7 +113,7 @@ const SDK = {
         },
 
         loadNavDefault: (cb) => {
-            $("#nav-container").load("defaultMenu.html", () => {
+            $("#nav-container").load("../HTML/Navigation/defaultMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -131,7 +131,7 @@ const SDK = {
         },
 
         loadNavAdmin: (cb) => {
-            $("#nav-container").load("adminMenu.html", () => {
+            $("#nav-container").load("../HTML/Navigation/adminMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -249,7 +249,6 @@ const SDK = {
                 url: "/choice" + "/" + id,
             }, cb);
         },
-
     },
     question: {
         createQuestion: (data, cb) => {

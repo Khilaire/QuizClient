@@ -20,11 +20,11 @@ $(document).ready(() => {
                 return alert("Der blev ikke fundet et match mellem brugernavn og kodeord");
             } else {
                 if (data.type === 1) {
-                    window.location.href = "defaultPage.html";
+                    window.location.href = "../HTML/defaultPage.html";
                     alert("Du bliver logget ind");
                     console.log(data);
                 } else {
-                    window.location.href = "adminPage.html";
+                    window.location.href = "../HTML/adminPage.html";
                     alert("Du er bliver logget ind som administrator");
                     console.log(data);
                 }

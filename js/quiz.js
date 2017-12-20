@@ -2,8 +2,8 @@ $(document).ready(() => {
 
     SDK.User.loadNavDefault();
 
-    var title = SDK.getQueryParam("title");
-    var quizId = SDK.getQueryParam("quizId");
+    let title = SDK.getQueryParam("title");
+    let quizId = SDK.getQueryParam("quizId");
 
     $("#correctAnswersBtn").hide();
 
@@ -33,10 +33,10 @@ $(document).ready(() => {
 
         if (userType === 1) {
             alert("Du bliver omdirigeret til dit dashboard");
-            window.location.href = "defaultPage.html";
+            window.location.href = "../HTML/defaultPage.html";
         } else {
             alert("Du bliver omdirigeret til dit dashboard");
-            window.location.href = "adminPage.html";
+            window.location.href = "../HTML/adminPage.html";
         }
     });
 

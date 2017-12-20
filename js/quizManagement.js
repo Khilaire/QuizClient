@@ -34,7 +34,7 @@ $(document).ready(() => {
                             console.log(data);
                         }
                         else if (err) {
-                            console.log("Der er sket en fejl!");
+                            console.log("Der er sket en fejl!", err);
                         } else {
                             alert("Den valgte quiz er nu slettet");
                         }
@@ -75,7 +75,7 @@ $(document).ready(() => {
                             console.log(data);
                         }
                         else if (err) {
-                            console.log("Der er sket en fejl!");
+                            console.log("Der er sket en fejl!", err);
                         } else {
                             alert("Den valgte quiz er nu slettet");
                         }
@@ -116,7 +116,7 @@ $(document).ready(() => {
                             console.log(data);
                         }
                         else if (err) {
-                            console.log("Der er sket en fejl!");
+                            console.log("Der er sket en fejl!", err);
                         } else {
                             alert("Den valgte quiz er nu slettet");
                         }
@@ -157,7 +157,7 @@ $(document).ready(() => {
                             console.log(data);
                         }
                         else if (err) {
-                            console.log("Der er sket en fejl!");
+                            console.log("Der er sket en fejl!", err);
                         } else {
                             alert("Den valgte quiz er nu slettet");
                         }
@@ -165,5 +165,86 @@ $(document).ready(() => {
                 }
             });
         });
+    });
+
+    // Opret quiz
+    $("#titleCrt").click(() => {
+        const courseId = $(".selectCourse").find("option:selected").val()
+        const quizTitle = $("#inputQuizTitle").val();
+
+        SDK.Quiz.createQuiz(courseId, quizTitle, (err, data) => {
+            data = JSON.parse(data);
+
+            console.log(err);
+            if (err && err.xhr.status === 401) {
+                $(".form-group").addClass("has-error");
+            }
+            else if (err) {
+                console.log("Der er sket en fejl!", err)
+            } else {
+                console.log("Succes!", data);
+                window.location.href = ("questionCreation.html?quizId=" + data.quizId);
+                const quizId = SDK.getQueryParam("quizId");
+            }
+        });
+    });
+
+    // Opret spørgsmål
+    $("#questionCrt").click(() => {
+        const quizId = SDK.getQueryParam("quizId");
+        const questionTitle = $("#inputQuestion").val();
+
+        SDK.Quiz.createQuestion(quizId, questionTitle, (err, data) => {
+            data = JSON.parse(data);
+
+            if (err && err.xhr.status === 401) {
+                console.log(data);
+            }
+            else if (err) {
+                console.log("Der er sket en fejl!", err)
+            } else {
+                console.log("Succes!", data);
+                window.location.href = ("choiceCreation.html?questionId=" + data.questionId + "&quizId=" + data.quizId);
+                const quizId = SDK.getQueryParam("questionId");
+            }
+        });
+    });
+
+    // Opret svarmulighed
+    $("#optionsCon").click(() => {
+
+        const quizId = SDK.getQueryParam("quizId");
+        const questionId = SDK.getQueryParam("questionId");
+        const choiceTitle = $("#inputOption").val();
+        const answer = $(".selectTrueFalse").find("option:selected").val();
+
+        SDK.Quiz.createChoice(questionId, choiceTitle, answer,(err, data) => {
+            data = JSON.parse(data);
+
+            if (err && err.xhr.status === 401) {
+                console.log(data);
+            }
+            else if (err) {
+                console.log("Der er sket en fejl!", err)
+            } else {
+                $("#inputOption").val(""); // tømmer feltet/"resetter"
+                return alert("Din svarmuligheded er gemt - du kan nu tilføje flere");
+                console.log("Succes!", data);
+                window.location.href = ("choiceCreation.html?questionId=" + data.questionId + "&quizId=" + data.quizId);
+                const quizId = SDK.getQueryParam("quizId");
+                const questionId = SDK.getQueryParam("questionId");
+            }
+        });
+    });
+    $("#questionCon").click(() => {
+        const quizId = SDK.getQueryParam("quizId");
+        return alert("Din svarmulighed er gemt - du bliver nu omridigeret tilbage til at oprette spørgsmål");
+        console.log("Succes!", data);
+        window.location.href = ("questionCreation.html?quizId=" + quizId);
+    });
+
+    $("#questionCrt").click(() => {
+        console.log("Succes!", data);
+        window.location.href = ("adminPage.html");
     });
 });
