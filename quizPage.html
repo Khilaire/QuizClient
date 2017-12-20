@@ -5,66 +5,64 @@
     <link rel="stylesheet" href="lib/css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
 
-
     <meta charset="UTF-8">
     <title>quizPage</title>
 </head>
 <body>
 
-    <div class="container">
-        <div class="row" id="nav-container"></div>
+<div class="container">
+    <div class="row" id="nav-container"></div>
 
+    <div class="jumbotron">
 
-        <div class="jumbotron">
+        <table class="table">
+            <tbody id="QuestionList"></tbody>
+        </table>
 
-            <table class="table">
-                <tbody id="QuestionList"></tbody>
-            </table>
-
-            <div class="panel-footer">
-                <button class="btn btn-primary" id="correctAnswersBtn">Se korrekte svar</button>
-                <button class="btn btn-success" id="saveBtn">Svar</button>
-                <button class="btn btn-danger" id="exitBtn">Tilbage</button>
-            </div>
-
-            <div class="container">
-                <div class="modal fade bd-example-modal-lg" id="submitAnswersModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3>Resultat</h3>
-                                <div class="modal-body">
-                                    <p id="quizQuestionList"></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="exitBtn btn btn-danger" id="exitModalBtn">Luk</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="container">
-                <div class="modal fade bd-example-modal-lg" id="correctResultsModal" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4>Korrekte svar</h4>
-                                <div class="modal-body">
-                                    <p id="correctResultsList"></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="exitBtn btn btn-danger" id="exitResultsModalBtn">Luk</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="panel-footer">
+            <button class="btn btn-primary" id="correctAnswersBtn">Se korrekte svar</button>
+            <button class="btn btn-success" id="saveBtn">Indsend svar</button>
+            <button class="btn btn-danger" id="exitBtn">Tilbage</button>
         </div>
+
+        <div class="container">
+            <div class="modal fade" id="submitAnswersModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Resultat</h3>
+                            <div class="modal-body">
+                                <p id="quizQuestionList"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="exitBtn btn btn-danger" id="exitModalBtn">Luk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="modal fade" id="correctResultsModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Korrekte svar</h4>
+                            <div class="modal-body">
+                                <p id="correctResultsList"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="exitBtn btn btn-danger" id="exitResultsModalBtn">Luk</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+</div>
 <script src="lib/js/jquery-3.2.1.js"></script>
 <script src="lib/js/bootstrap.js"></script>
 <script src="js/sdk.js"></script>

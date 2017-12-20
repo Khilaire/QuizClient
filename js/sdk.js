@@ -1,6 +1,6 @@
 const SDK = {
 
-    // kode taget fra linket: https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
+    // Henvist til løsning af Cecilie Sylvest Fosbo. Hentet fra: https://stackoverflow.com/questions/46324730/how-to-get-parameters-from-url-in-javascript
     getQueryParam: (sParam) => {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -15,11 +15,12 @@ const SDK = {
             }
         }
     },
-    //Hej med dig
-    serverURL: "http://localhost:8080/api",
 
+    // server URL
+    serverURL: "http://localhost:8080/api",
     request: (options, cb) => {
 
+        // Inspireret af eksemplet fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
         let headers = {};
         if (options.headers) {
             Object.keys(options.headers).forEach((h) => {
@@ -27,6 +28,7 @@ const SDK = {
             });
         }
 
+        // Inspireret af eksemplet fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
         $.ajax({
             url: SDK.serverURL + options.url,
             method: options.method,
@@ -45,7 +47,107 @@ const SDK = {
 
     },
 
+    // Allt følgende har taget udgangspunkt i eksemplet, Bookstore, fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
+    User: {
+        current: () => {
+            return SDK.Storage.load("user");
+        },
 
+        createUser: (firstName, lastName, userName, password, type, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/user/",
+                data: {
+                    firstName: firstName,
+                    lastName: lastName,
+                    username: userName,
+                    password: password,
+                    type: type,
+                }
+            }, cb);
+        },
+
+        logOut: () => {
+
+            SDK.Storage.remove("userId");
+            SDK.Storage.remove("user");
+            window.location.href = "index.html";
+        },
+
+        login: (username, password, cb) => {
+            SDK.request({
+                data: {
+                    username: username,
+                    password: password,
+                },
+                url: "/user/login",
+                method: "POST"
+            }, (err, data) => {
+
+                if (err) return cb(err);
+
+                SDK.Storage.persist("userId", data.userId);
+                SDK.Storage.persist("user", data);
+
+                cb(null, data);
+            });
+        },
+
+        loadNavNon: (cb) => {
+            $("#nav-container").load("nonMenu.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+           
+            <li><a href="index.html" id="logout-link">log ud</a></li>
+          `);
+
+                } else {
+                    $(".navbar-right").html(`
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+          `);
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+            });
+        },
+
+        loadNavDefault: (cb) => {
+            $("#nav-container").load("defaultMenu.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+           
+            <li><a href="index.html" id="logout-link">Log ud</a></li>
+          `);
+                } else {
+                    $(".navbar-right").html(`
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+          `);
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+            });
+        },
+
+        loadNavAdmin: (cb) => {
+            $("#nav-container").load("adminMenu.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+           
+            <li><a href="index.html" id="logout-link">Log ud</a></li>
+          `);
+                } else {
+                    $(".navbar-right").html(`
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+          `);
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+            });
+        }
+    },
     Quiz: {
         createQuiz: (courseId, quizTitle, cb) => {
             SDK.request({
@@ -57,7 +159,6 @@ const SDK = {
                 },
             }, (err, data) => {
 
-                //On login-error
                 if (err) return cb(err);
                 console.log(err);
 
@@ -67,7 +168,6 @@ const SDK = {
                 cb(null, data);
             });
         },
-
 
         createQuestion: (quizId, questionTitle, cb) => {
             SDK.request({
@@ -79,12 +179,8 @@ const SDK = {
                 },
             }, (err, data) => {
 
-                //On login-error
                 if (err) return cb(err);
                 console.log(err);
-
-                //SDK.Storage.persist("questionId", data.courseId);
-                //SDK.Storage.persist("questionTitle", data.questionTitle);
 
                 cb(null, data);
             });
@@ -101,10 +197,8 @@ const SDK = {
                 },
             }, (err, data) => {
 
-                //On login-error
                 if (err) return cb(err);
                 console.log(err);
-
 
                 cb(null, data);
             });
@@ -112,11 +206,9 @@ const SDK = {
 
         deleteQuiz: (id, cb) => {
 
-
             SDK.request({
                 method: "DELETE",
                 url: "/quiz/" + id
-
 
             }, (err, data) => {
                 if (err) return cb(err);
@@ -127,7 +219,6 @@ const SDK = {
         loadQuestions: (quizId, callback) => {
             //Loading the selected quiz's id from local storage
 
-
             SDK.request({
                 method: "GET",
                 url: "/question/" + quizId,
@@ -137,7 +228,6 @@ const SDK = {
                 callback(null, data);
             });
         },
-
 
         findById: (id, cb) => {
             SDK.request({
@@ -161,7 +251,16 @@ const SDK = {
         },
 
     },
+    question: {
+        createQuestion: (data, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/question",
+                data: data,
 
+            }, cb);
+        }
+    },
     Choice: {
         createChoice: (data, cb) => {
             SDK.request({
@@ -173,158 +272,10 @@ const SDK = {
         },
 
     },
-    question: {
-        createQuestion: (data, cb) => {
-            SDK.request({
-                method: "POST",
-                url: "/question",
-                data: data,
 
-            }, cb);
-        }
-    },
-    User: {
-
-        current: () => {
-            return SDK.Storage.load("user");
-        },
-        createUser: (firstName, lastName, userName, password, type, cb) => {
-            SDK.request({
-                method: "POST",
-                url: "/user/",
-                data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    username: userName,
-                    password: password,
-                    type: type,
-                }
-            }, cb);
-        },
-        logOut: () => {
-
-            SDK.Storage.remove("userId");
-            SDK.Storage.remove("user");
-            window.location.href = "index.html";
-        },
-
-
-
-        deleteUser: (id, cb) =>{
-            SDK.request({
-                    method: "DELETE",
-                    url: "/user/" + id,
-                },
-
-                (err, data) => {
-
-                    if (err) return cb(err);
-
-
-                    cb(null, data);
-                });
-
-
-        },
-        login: (username, password, cb) => {
-            SDK.request({
-                data: {
-                    username: username,
-                    password: password,
-
-                },
-                url: "/user/login",
-                method: "POST"
-            }, (err, data) => {
-
-                //On login-error
-                if (err) return cb(err);
-
-                SDK.Storage.persist("userId", data.userId);
-                SDK.Storage.persist("user", data);
-
-                cb(null, data);
-
-            });
-        },
-
-
-
-        loadNavNon: (cb) => {
-            $("#nav-container").load("nonMenu.html", () => {
-                const currentUser = SDK.User.current();
-                if (currentUser) {
-                    $(".navbar-right").html(`
-           
-            <li><a href="index.html" id="logout-link">log ud</a></li>
-          `);
-
-                } else {
-                    $(".navbar-right").html(`
-            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
-          `);
-                }
-                $("#logout-link").click(() => SDK.User.logOut());
-                cb && cb();
-
-
-            });
-
-
-        },
-
-
-        loadNavDefault: (cb) => {
-            $("#nav-container").load("defaultMenu.html", () => {
-                const currentUser = SDK.User.current();
-                if (currentUser) {
-                    $(".navbar-right").html(`
-           
-            <li><a href="index.html" id="logout-link">Log ud</a></li>
-          `);
-
-                } else {
-                    $(".navbar-right").html(`
-            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
-          `);
-                }
-                $("#logout-link").click(() => SDK.User.logOut());
-                cb && cb();
-
-
-            });
-
-
-        },
-
-        loadNavAdmin: (cb) => {
-            $("#nav-container").load("adminMenu.html", () => {
-                const currentUser = SDK.User.current();
-                if (currentUser) {
-                    $(".navbar-right").html(`
-           
-            <li><a href="index.html" id="logout-link">Log ud</a></li>
-          `);
-
-                } else {
-                    $(".navbar-right").html(`
-            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
-          `);
-                }
-                $("#logout-link").click(() => SDK.User.logOut());
-                cb && cb();
-
-
-            });
-
-
-        }
-
-
-    },
-
+    // Inspireret af eksemplet fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
     Storage: {
-        prefix: "DøkQuizSDK",
+        prefix: "FMLQUIZsdk",
         //Function for storing element in local storage
         persist: (key, value) => {
             window.localStorage.setItem(SDK.Storage.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
@@ -344,5 +295,4 @@ const SDK = {
             window.localStorage.removeItem(SDK.Storage.prefix + key);
         }
     },
-
 };

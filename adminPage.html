@@ -27,22 +27,10 @@
 
                     <div class="courseSelection">
                         <button type="button" class="btn-primary courseSelection" id="ca-button" data-toggle="modal"
-                                data-target="#admModal">Opret administrator
+                                data-target="#admModal">Opret ny administrator
                         </button>
                         <button type="button" class="btn-primary courseSelection" id="cq-button" data-toggle="modal"
-                                data-target="#createQuizModal">Opret quiz
-                        </button>
-                        <button type="button" class="btn-primary courseSelection" id="au-button" data-toggle="modal"
-                                data-target="#makModal">Se alle brugere
-                        </button>
-                        <button type="button" class="btn-primary courseSelection" id="aq-button" data-toggle="modal"
-                                data-target="#allQuizzesModal">Se alle quizzes
-                        </button>
-                        <button type="button" class="btn-primary courseSelection" id="tes-button" data-toggle="modal"
-                                data-target="#finModal">Slet quiz
-                        </button>
-                        <button type="button" class="btn-primary courseSelection" id="ted-button" data-toggle="modal"
-                                data-target="#finModal">Tilgå quiz
+                                data-target="#createQuizModal">Opret ny quiz
                         </button>
 
                         <!-- Modal for oprettelse af administrator-->
@@ -138,41 +126,12 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" id="createQuizBtn">Opret quiz
-                                        </button>
+                                        <button type="submit" class="btn btn-success" id="createQuizBtn">Opret quiz</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Modal til visning af alle quizzes -->
-                        <div class="modal fade" id="allQuizzesModal" tabindex="-1" role="dialog" aria-labelledby="allQuizzesModalTitle" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <form>
-                                        <div class="form-group col-md-12">
-                                            <!-- Table til liste alle quizzes-->
-                                            <table class="table  table-hover" id="quizListAll">
-                                                <!-- table head-->
-                                                <thead>
-                                                <tr>
-                                                    <th>Oversigt over alle quizzes</th>
-                                                </tr>
-                                                </thead>
-                                                <!-- table body, container til data-->
-                                                <tbody id="listContainerAllQuizzes"></tbody>
-                                            </table>
-                                        </div>
-                                    </form>
-                                    <!-- Modal footer-->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                 </div>
