@@ -1,5 +1,8 @@
 $(document).ready(() => {
 
+    SDK.User.loadNavDefault();
+
+
     // Valg: Distrubuerede Systemer
     const $listContainerTbodyDis = $("#listContainerDis");
 

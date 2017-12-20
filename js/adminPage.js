@@ -1,5 +1,7 @@
 $(document).ready(() => {
 
+    SDK.User.loadNavAdmin();
+
     // Opret quiz
     $("#createQuizBtn").click(() => {
         const quizTitle = $("#inputQuizTitle").val();

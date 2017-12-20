@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    SDK.User.loadNav();
+    SDK.User.loadNavNon();
 
     $("#createUserbtn").on("click", () => {
 

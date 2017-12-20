@@ -1,6 +1,6 @@
 $(document).ready(() => {
 
-    SDK.User.loadNav();
+    SDK.User.loadNavDefault();
 
     var title = SDK.getQueryParam("title");
     var quizId = SDK.getQueryParam("quizId");

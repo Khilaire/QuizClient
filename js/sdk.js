@@ -250,8 +250,8 @@ const SDK = {
 
 
 
-        loadNavUser: (cb) => {
-            $("#nav-container-user").load("navUser.html", () => {
+        loadNavNon: (cb) => {
+            $("#nav-container").load("nonMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -274,8 +274,31 @@ const SDK = {
         },
 
 
-        loadNav: (cb) => {
-            $("#nav-container").load("nav.html", () => {
+        loadNavDefault: (cb) => {
+            $("#nav-container").load("defaultMenu.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+           
+            <li><a href="index.html" id="logout-link">Log ud</a></li>
+          `);
+
+                } else {
+                    $(".navbar-right").html(`
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+          `);
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+
+
+            });
+
+
+        },
+
+        loadNavAdmin: (cb) => {
+            $("#nav-container").load("adminMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
