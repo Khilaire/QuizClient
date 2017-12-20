@@ -2,33 +2,33 @@ $(document).ready(() => {
 
     SDK.User.loadNav();
 
+    $("#loginBtn").on("click", () => {
 
-    $("#login-button").click(() => {
         const username = $("#inputUsername").val();
         const password = $("#inputPassword").val();
 
-        // Metode til login (inspireret af tutor eksempel)
         SDK.User.login(username, password, (err, data) => {
+            data = JSON.parse(data);
+
             if (err && err.xhr.status === 401) {
                 $(".form-group").addClass("has-error");
-                return alert("Something went wrong");
-            }
-            else if (err){
-                alert ("Der blev ikke fundet et match mellem brugernavn og kodeord");
-            } else {
+                return alert("Der er sket en fejl!");
+                console.log(data);
 
-                // Hvis type er 0, refereres der til en administrator, mens der ved type 1 refereres til en almindelig bruger
-                if(data.type === 1) {
+            }
+            else if (err) {
+                return alert("Der blev ikke fundet et match mellem brugernavn og kodeord");
+            } else {
+                if (data.type === 1) {
                     window.location.href = "defaultPage.html";
-                    alert("Du er logget ind som ALMINDELIG bruger");
+                    alert("Du bliver logget ind");
+                    console.log(data);
                 } else {
                     window.location.href = "adminPage.html";
-                    alert("Du er logget ind som administrator");
+                    alert("Du er bliver logget ind som administrator");
+                    console.log(data);
                 }
-
             }
         });
-
     });
-
 });

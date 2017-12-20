@@ -3,7 +3,7 @@ $(document).ready(() => {
     // Valg: Distrubuerede Systemer
     const $listContainerTbodyDis = $("#listContainerDis");
 
-    $("#dis-button").click(() => {
+    $("#dis-button").on("click", () => {
 
         $("#quizListDis").show();
         // Id 1 refererer til den quiz, der er tilknyttet kursus med Id 1 (Distribuerede systemer)
@@ -83,5 +83,4 @@ $(document).ready(() => {
             });
         });
     });
-
 });

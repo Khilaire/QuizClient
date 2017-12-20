@@ -1,6 +1,6 @@
 const SDK = {
 
-    // Hentet fra: https://developer.salesforce.com/forums/?id=906F0000000g1blIAA
+    // kode taget fra linket: https://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
     getQueryParam: (sParam) => {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -15,10 +15,9 @@ const SDK = {
             }
         }
     },
+    //Hej med dig
+    serverURL: "http://localhost:8080/api",
 
-    serverURL: "http://localhost:9090/api",
-
-    // SDK request
     request: (options, cb) => {
 
         let headers = {};
@@ -36,6 +35,7 @@ const SDK = {
             dataType: "json",
             data: JSON.stringify(options.data),
             success: (data, status, xhr) => {
+
                 cb(null, data, status, xhr);
             },
             error: (xhr, status, errorThrown) => {
@@ -45,104 +45,7 @@ const SDK = {
 
     },
 
-    // Ændre til question?
-   /* Book: {
-        addToBasket: (book) => {
-            let basket = SDK.Storage.load("basket");
 
-            //Has anything been added to the basket before?
-            if (!basket) {
-                return SDK.Storage.persist("basket", [{
-                    count: 1,
-                    book: book
-                }]);
-            }
-
-            //Eksisterer XYZ i forvejen?
-            let foundBook = basket.find(b => b.book.id === book.id);
-            if (foundBook) {
-                let i = basket.indexOf(foundBook);
-                basket[i].count++;
-            } else {
-                basket.push({
-                    count: 1,
-                    book: book
-                });
-            }
-
-            SDK.Storage.persist("basket", basket);
-        },
-        // Find alle
-        findAll: (cb) => {
-            SDK.request({
-                method: "GET",
-                url: "/books",
-                headers: {
-                    filter: {
-                        include: ["authors"]
-                    }
-                }
-            }, cb);
-        },
-        // Opret XYZ
-        create: (data, cb) => {
-            SDK.request({
-                method: "POST",
-                url: "/books",
-                data: data,
-                headers: {authorization: SDK.Storage.load("tokenId")}
-            }, cb);
-        }
-    },
-    Author: {
-        findAll: (cb) => {
-            SDK.request({method: "GET", url: "/authors"}, cb);
-        }
-    },
-*/
-
-   // Quiz -> Questions -> options
-
-    // Opret quiz (inspireret af "Order fra Jesper XYZ's eksempel fra øvelsestime")
-    /* Quiz: {
-        createQuiz: (data, cb) => {
-            SDK.request({
-                method: "POST",
-                url: "/quiz",
-                data: data,
-            }, cb);
-        },
-
-        currentQuiz: () => {
-            return SDK.Storage.load("quizId");
-        },
-
-        findById: (id, cb) => {
-            SDK.request({
-                method: "GET",
-                url: "/quiz" + "/" + id,
-            }, cb);
-        },
-
-        loadQuestions: (callback) =>{
-            //Loading the selected quiz's id from local storage
-            const selectedQuiz = SDK.Storage.load("selectedQuiz");
-            const quizId = selectedQuiz.quizId;
-
-            SDK.request({
-                method: "GET",
-                url: "/question/" + quizId,
-                headers: {
-                    //Header for authorization in server
-                    authorization: SDK.Storage.load("myToken"),
-                },
-            }, (err, data) => {
-                if (err) return callback(err);
-                callback(null, data);
-            });
-        },
-    },
-    */
     Quiz: {
         createQuiz: (courseId, quizTitle, cb) => {
             SDK.request({
@@ -202,105 +105,133 @@ const SDK = {
                 if (err) return cb(err);
                 console.log(err);
 
-                //SDK.Storage.persist("questionId", data.courseId);
-                //SDK.Storage.persist("questionTitle", data.questionTitle);
 
                 cb(null, data);
             });
         },
 
+        deleteQuiz: (id, cb) => {
 
-        currentQuiz: () => {
-            return SDK.Storage.load("quizId");
+
+            SDK.request({
+                method: "DELETE",
+                url: "/quiz/" + id
+
+
+            }, (err, data) => {
+                if (err) return cb(err);
+                cb(null, data);
+            });
         },
+
+        loadQuestions: (quizId, callback) => {
+            //Loading the selected quiz's id from local storage
+
+
+            SDK.request({
+                method: "GET",
+                url: "/question/" + quizId,
+
+            }, (err, data) => {
+                if (err) return callback(err);
+                callback(null, data);
+            });
+        },
+
 
         findById: (id, cb) => {
             SDK.request({
                 method: "GET",
                 url: "/quiz" + "/" + id,
             }, cb);
-        }
-    },
-    deleteQuiz: (quizId, cb) => {
-        //Loading the selected course's id from local storage
-        //const selectedQuiz = SDK.Storage.load("selectedQuiz")
-        //const quizId = selectedQuiz.quizId;
-
-        SDK.request({
-            method: "DELETE",
-            url: "/quiz" + "/" + quizId,
-
-
-        }, (err, data) => {
-            if (err) return cb(err);
-            cb(null, data)
-        });
-    },
-
-
-
-
-
- /*   Order: {
-        create: (data, cb) => {
-            SDK.request({
-                method: "POST",
-                url: "/orders",
-                data: data,
-                headers: {authorization: SDK.Storage.load("tokenId")}
-            }, cb);
         },
-        // Find mine XYZ
-        findMine: (cb) => {
+
+        findQuestionById: (id, cb) => {
             SDK.request({
                 method: "GET",
-                url: "/orders/" + SDK.User.current().id + "/allorders",
-                headers: {
-                    authorization: SDK.Storage.load("tokenId")
-                }
+                url: "/question" + "/" + id,
+            }, cb);
+        },
+
+        findChoiceById: (id, cb) => {
+            SDK.request({
+                method: "GET",
+                url: "/choice" + "/" + id,
+            }, cb);
+        },
+
+    },
+
+    Choice: {
+        createChoice: (data, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/choice",
+                data: data,
+
+            }, cb);
+        },
+
+    },
+    question: {
+        createQuestion: (data, cb) => {
+            SDK.request({
+                method: "POST",
+                url: "/question",
+                data: data,
+
             }, cb);
         }
-    },*/
-
-    // Alle funktioner tilknyttet en 'bruger'
+    },
     User: {
-        // Find alle brugere
-        findAll: (cb) => {
-            SDK.request({method: "GET", url: "/user"}, cb);
-        },
+
         current: () => {
             return SDK.Storage.load("user");
         },
-
-        // Opret ny bruger
-        createUser: (firstName, surname, username, password, type, cb) => {
+        createUser: (firstName, lastName, userName, password, type, cb) => {
             SDK.request({
                 method: "POST",
                 url: "/user/",
                 data: {
                     firstName: firstName,
-                    lastName: surname,
-                    username: username,
+                    lastName: lastName,
+                    username: userName,
                     password: password,
                     type: type,
                 }
             }, cb);
         },
-
-        // Log ud fra den nuværende session
         logOut: () => {
-            SDK.Storage.remove("tokenId");
+
             SDK.Storage.remove("userId");
             SDK.Storage.remove("user");
             window.location.href = "index.html";
         },
 
-        // Login
+
+
+        deleteUser: (id, cb) =>{
+            SDK.request({
+                    method: "DELETE",
+                    url: "/user/" + id,
+                },
+
+                (err, data) => {
+
+                    if (err) return cb(err);
+
+
+                    cb(null, data);
+                });
+
+
+        },
         login: (username, password, cb) => {
             SDK.request({
                 data: {
                     username: username,
-                    password: password
+                    password: password,
+
                 },
                 url: "/user/login",
                 method: "POST"
@@ -310,40 +241,72 @@ const SDK = {
                 if (err) return cb(err);
 
                 SDK.Storage.persist("userId", data.userId);
-                SDK.Storage.persist("user", data.user);
+                SDK.Storage.persist("user", data);
 
                 cb(null, data);
 
             });
         },
 
-        // Load navigation
+
+
+        loadNavUser: (cb) => {
+            $("#nav-container-user").load("navUser.html", () => {
+                const currentUser = SDK.User.current();
+                if (currentUser) {
+                    $(".navbar-right").html(`
+           
+            <li><a href="index.html" id="logout-link">log ud</a></li>
+          `);
+
+                } else {
+                    $(".navbar-right").html(`
+            <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
+          `);
+                }
+                $("#logout-link").click(() => SDK.User.logOut());
+                cb && cb();
+
+
+            });
+
+
+        },
+
+
         loadNav: (cb) => {
             $("#nav-container").load("nav.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
-            <li><a href="defaultPage.html" id="defaultHome">Hjem</a></li>
-            <li><a href="index.html" id="logout-link">Logout</a></li>
+           
+            <li><a href="index.html" id="logout-link">Log ud</a></li>
           `);
+
                 } else {
                     $(".navbar-right").html(`
-            <li><a href="index.html" id="home">Hjem</a></li>
             <li><a href="loginPage.html">Login <span class="sr-only">(current)</span></a></li>
-            
           `);
                 }
                 $("#logout-link").click(() => SDK.User.logOut());
                 cb && cb();
+
+
             });
+
+
         }
+
+
     },
 
     Storage: {
-        prefix: "BookStoreSDK",
+        prefix: "DøkQuizSDK",
+        //Function for storing element in local storage
         persist: (key, value) => {
             window.localStorage.setItem(SDK.Storage.prefix + key, (typeof value === 'object') ? JSON.stringify(value) : value)
         },
+        //Function for loading element from local storage
         load: (key) => {
             const val = window.localStorage.getItem(SDK.Storage.prefix + key);
             try {
@@ -353,8 +316,10 @@ const SDK = {
                 return val;
             }
         },
+        //Function for deleting element in local storage
         remove: (key) => {
             window.localStorage.removeItem(SDK.Storage.prefix + key);
         }
-    }
+    },
+
 };

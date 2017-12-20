@@ -26,17 +26,17 @@
                     </div>
 
                     <div class="courseSelection">
-                        <button type="button" class="btn-primary courseSelection" id="signup" data-toggle="modal"
+                        <button type="button" class="btn-primary courseSelection" id="ca-button" data-toggle="modal"
                                 data-target="#admModal">Opret administrator
                         </button>
-                        <button type="button" class="btn-primary courseSelection" id="itf-button" data-toggle="modal"
+                        <button type="button" class="btn-primary courseSelection" id="cq-button" data-toggle="modal"
                                 data-target="#createQuizModal">Opret quiz
                         </button>
-                        <button type="button" class="btn-primary courseSelection" id="mak-button" data-toggle="modal"
+                        <button type="button" class="btn-primary courseSelection" id="au-button" data-toggle="modal"
                                 data-target="#makModal">Se alle brugere
                         </button>
-                        <button type="button" class="btn-primary courseSelection" id="fin-button" data-toggle="modal"
-                                data-target="#finModal">Se alle quizzes
+                        <button type="button" class="btn-primary courseSelection" id="aq-button" data-toggle="modal"
+                                data-target="#allQuizzesModal">Se alle quizzes
                         </button>
                         <button type="button" class="btn-primary courseSelection" id="tes-button" data-toggle="modal"
                                 data-target="#finModal">Slet quiz
@@ -138,13 +138,51 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" id="createQuizBtn">Opret quiz
+                                        <button type="submit" class="btn btn-success" id="createQuizBtn">Opret quiz
                                         </button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Modal til visning af alle quzzes -->
+                        <div class="modal fade" id="allQuizzesModal" tabindex="-1" role="dialog" aria-labelledby="allQuizzesModalTitle" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="form-group col-md-12">
+                                            <!-- Table til liste alle quizzes-->
+                                            <table class="table  table-hover" id="quizListAll">
+                                                <!-- table head-->
+                                                <thead>
+                                                <tr>
+                                                    <th>Oversigt over alle quizzes</th>
+                                                </tr>
+                                                </thead>
+                                                <!-- table body, container til data-->
+                                                <tbody id="listContainerAllQuizzes"></tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                    <!-- Modal footer-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Luk</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="container">
+                            <h1>Choose a quiz...</h1>
+                            <div class="jumbotron">
+                                <table class="table" id="tablehead">
+                                    <tbody id="quizList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
