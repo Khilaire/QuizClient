@@ -1,6 +1,6 @@
 const SDK = {
 
-    // Henvist til løsning af Cecilie Sylvest Fosbo. Hentet fra: https://stackoverflow.com/questions/46324730/how-to-get-parameters-from-url-in-javascript
+    // Henvist til løsning (getQueryParam) af Cecilie Sylvest Fosbo. Hentet fra: https://stackoverflow.com/questions/46324730/how-to-get-parameters-from-url-in-javascript
     getQueryParam: (sParam) => {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
             sURLVariables = sPageURL.split('&'),
@@ -44,15 +44,17 @@ const SDK = {
                 cb({xhr: xhr, status: status, error: errorThrown});
             }
         });
-
     },
 
-    // Allt følgende har taget udgangspunkt i eksemplet, Bookstore, fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
+    // Alt følgende har taget udgangspunkt i eksemplet, Bookstore, fra undervisningen (Javascript crash course af Jesper Bruun Hansen)
     User: {
+
+        // API-request: Returner nuværende bruger
         current: () => {
             return SDK.Storage.load("user");
         },
 
+        // API-request: Opret bruger
         createUser: (firstName, lastName, userName, password, type, cb) => {
             SDK.request({
                 method: "POST",
@@ -67,13 +69,7 @@ const SDK = {
             }, cb);
         },
 
-        logOut: () => {
-
-            SDK.Storage.remove("userId");
-            SDK.Storage.remove("user");
-            window.location.href = "../HTML/index.html";
-        },
-
+        // API-request: login
         login: (username, password, cb) => {
             SDK.request({
                 data: {
@@ -93,8 +89,19 @@ const SDK = {
             });
         },
 
+        // API-request: log ud
+        logOut: () => {
+
+            SDK.Storage.remove("userId");
+            SDK.Storage.remove("user");
+
+            // Omdiriger efter man er logget ud
+            window.location.href = "../HTML/index.html";
+        },
+
+        // Load navigation for gæster
         loadNavNon: (cb) => {
-            $("#nav-container").load("../HTML/Navigation/nonMenu.html", () => {
+            $("#nav-container").load("./Navigation/nonMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -112,8 +119,9 @@ const SDK = {
             });
         },
 
+        // Load navigation for almindelige bruere
         loadNavDefault: (cb) => {
-            $("#nav-container").load("../HTML/Navigation/defaultMenu.html", () => {
+            $("#nav-container").load("./Navigation/defaultMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -130,8 +138,9 @@ const SDK = {
             });
         },
 
+        // Load navigation for administratorer
         loadNavAdmin: (cb) => {
-            $("#nav-container").load("../HTML/Navigation/adminMenu.html", () => {
+            $("#nav-container").load("./Navigation/adminMenu.html", () => {
                 const currentUser = SDK.User.current();
                 if (currentUser) {
                     $(".navbar-right").html(`
@@ -146,9 +155,11 @@ const SDK = {
                 $("#logout-link").click(() => SDK.User.logOut());
                 cb && cb();
             });
-        }
+        },
     },
+
     Quiz: {
+        // API-request: Opret ny quiz
         createQuiz: (courseId, quizTitle, cb) => {
             SDK.request({
                 method: "POST",
@@ -169,6 +180,7 @@ const SDK = {
             });
         },
 
+        // API-request: Opret ny spørgsmål
         createQuestion: (quizId, questionTitle, cb) => {
             SDK.request({
                 method: "POST",
@@ -186,6 +198,7 @@ const SDK = {
             });
         },
 
+        // API-request: Opret ny svarmulighed
         createChoice: (questionId, choiceTitle, answer, cb) => {
             SDK.request({
                 method: "POST",
@@ -204,8 +217,8 @@ const SDK = {
             });
         },
 
+        // API-request: Slet quiz
         deleteQuiz: (id, cb) => {
-
             SDK.request({
                 method: "DELETE",
                 url: "/quiz/" + id
@@ -216,19 +229,7 @@ const SDK = {
             });
         },
 
-        loadQuestions: (quizId, callback) => {
-            //Loading the selected quiz's id from local storage
-
-            SDK.request({
-                method: "GET",
-                url: "/question/" + quizId,
-
-            }, (err, data) => {
-                if (err) return callback(err);
-                callback(null, data);
-            });
-        },
-
+        // API-request: Find quiz pba. Id
         findById: (id, cb) => {
             SDK.request({
                 method: "GET",
@@ -236,6 +237,7 @@ const SDK = {
             }, cb);
         },
 
+        // API-request: Find spørgsmål pba. Id
         findQuestionById: (id, cb) => {
             SDK.request({
                 method: "GET",
@@ -243,6 +245,7 @@ const SDK = {
             }, cb);
         },
 
+        // API-request: Find svarmulighed pba. Id
         findChoiceById: (id, cb) => {
             SDK.request({
                 method: "GET",
@@ -250,6 +253,8 @@ const SDK = {
             }, cb);
         },
     },
+
+    // API-request: Opret ny spørgsmål
     question: {
         createQuestion: (data, cb) => {
             SDK.request({
@@ -258,8 +263,10 @@ const SDK = {
                 data: data,
 
             }, cb);
-        }
+        },
     },
+
+    // API-request: Opret ny svarmulighed
     Choice: {
         createChoice: (data, cb) => {
             SDK.request({
@@ -269,7 +276,6 @@ const SDK = {
 
             }, cb);
         },
-
     },
 
     // Inspireret af eksemplet fra undervisningen (Javascript crash course af Jesper Bruun Hansen)

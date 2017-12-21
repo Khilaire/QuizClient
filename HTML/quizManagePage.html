@@ -7,13 +7,12 @@
 
     <meta charset="UTF-8">
     <title>Quiz Management</title>
+
 </head>
 <body>
 
 <div class="container">
-
     <div class="row" id="nav-container"></div>
-
     <div class="row">
         <div class="col-lg-12">
             <!-- Standard Jumbotron-tema benyttes af hensyn til consistency-->
@@ -21,10 +20,10 @@
                 <h3>Administrer quizzes</h3>
                 <div class="contentArea">
                     <div class="defaultWelcometxt" id="defaultWelcometxt">
-                        <p>Du kan herfra få et overblik over eksisterende quizzes samt slette forældede og oprette nye</p>
+                        <p>Du kan herfra få et overblik over eksisterende quizzes samt slette forældede og oprette
+                            nye</p>
                         <h4>Quiz oversigt</h4>
                     </div>
-
                     <div class="courseSelection">
                         <button type="button" class="btn-primary courseSelection" id="dis-button" data-toggle="modal"
                                 data-target="#disModal">Distribuerede Systemer
@@ -38,14 +37,13 @@
                         <button type="button" class="btn-primary courseSelection" id="fin-button" data-toggle="modal"
                                 data-target="#finModal">VØS(3) - Finansiering
                         </button>
-
                         <div class="newQuizzesTxt" id="newQuizzes">
                             <br>
                             <h4>Opret ny quiz</h4>
                         </div>
-                        <button  onclick="location.href = '../HTML/quizCreation.html';" type="button" class="btn-success createNewQuiz" id="cnq-button">Opret ny quiz
+                        <button onclick="location.href = '../HTML/quizCreation.html';" type="button"
+                                class="btn-success createNewQuiz" id="cnq-button">Opret ny quiz
                         </button>
-
                         <!-- Modal for distribuerede systemer-->
                         <div class="modal fade" id="disModal" tabindex="-1" role="dialog"
                              aria-labelledby="disModalTitle" aria-hidden="true">
@@ -105,7 +103,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Modal for IT Makroøkonomi-->
                     <div class="modal fade" id="makModal" tabindex="-1" role="dialog" aria-labelledby="makModalTitle"
                          aria-hidden="true">
@@ -135,7 +132,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Modal for VØS(3) Finansiering-->
                     <div class="modal fade" id="finModal" tabindex="-1" role="dialog" aria-labelledby="finModalTitle"
                          aria-hidden="true">
@@ -173,7 +169,7 @@
 
 <footer class="footer">
     <div class="container" align="center">
-        <p class="text-muted">2017 - Eksamensprojekt i faget, Distribuerede Systemer.</p>
+        <p class="text-muted">Eksamensprojekt i faget, Distribuerede Systemer.</p>
     </div>
 </footer>
 
@@ -182,10 +178,7 @@
 <script src="../js/sdk.js"></script>
 <script src="../js/adminPage.js"></script>
 <script src="../js/quizManagement.js"></script>
-<script>
-    SDK.User.loadNavAdmin();
-</script>
-
+<script>SDK.User.loadNavAdmin();</script>
 
 </body>
 </html>

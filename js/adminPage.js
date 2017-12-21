@@ -1,12 +1,16 @@
 $(document).ready(() => {
 
+    // load navigationsbar for administrator
     SDK.User.loadNavAdmin();
+
+    // Deklarere variable til storage af input data
     const quizTitle = $("#inputQuizTitle").val();
     const courseId = $(".inputSelectCourse").find("option:selected").val();
 
-    // Opret ny quiz
+    // On Click event, opret quiz
     $("#createQuizBtn").click(() => {
 
+        // API kald
         SDK.Quiz.createQuiz(courseId, quizTitle, (err, data) => {
             console.log(err);
 
@@ -16,7 +20,7 @@ $(document).ready(() => {
             else if (err) {
                 console.log("Der er sket en fejl!")
             } else {
-                alert("Succes! Din quiz, " + quizTitle + ", er nu oprettet")
+                return alert("Succes! Din quiz, " + quizTitle + ", er nu oprettet")
             }
         });
     });

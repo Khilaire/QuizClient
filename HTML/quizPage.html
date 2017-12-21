@@ -7,24 +7,21 @@
 
     <meta charset="UTF-8">
     <title>quizPage</title>
+
 </head>
 <body>
 
 <div class="container">
     <div class="row" id="nav-container"></div>
-
     <div class="jumbotron">
-
         <table class="table">
             <tbody id="QuestionList"></tbody>
         </table>
-
         <div class="panel-footer">
             <button class="btn btn-primary" id="correctAnswersBtn">Se korrekte svar</button>
             <button class="btn btn-success" id="saveBtn">Indsend svar</button>
             <button class="btn btn-danger" id="exitBtn">Tilbage</button>
         </div>
-
         <div class="container">
             <div class="modal fade" id="submitAnswersModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -42,7 +39,6 @@
                 </div>
             </div>
         </div>
-
         <div class="container">
             <div class="modal fade" id="correctResultsModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -60,20 +56,20 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-<script src="lib/js/jquery-3.2.1.js"></script>
-<script src="lib/js/bootstrap.js"></script>
-<script src="js/sdk.js"></script>
-<script src="js/quiz.js"></script>
+
+<footer class="footer">
+    <div class="container" align="center">
+        <p class="text-muted">Eksamensprojekt i faget, Distribuerede Systemer.</p>
+    </div>
+</footer>
 
 <script src="../lib/js/jquery-3.2.1.js"></script>
 <script src="../lib/js/bootstrap.js"></script>
 <script src="../js/sdk.js"></script>
 <script src="../js/quiz.js"></script>
-<script>
-    SDK.User.loadNavDefault();
-</script>
+<script>SDK.User.loadNavDefault();</script>
+
 </body>
 </html>

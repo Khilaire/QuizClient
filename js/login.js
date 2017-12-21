@@ -1,9 +1,11 @@
 $(document).ready(() => {
 
+    // load navigationsbar for gæster
     SDK.User.loadNavNon();
 
     $("#loginBtn").on("click", () => {
 
+        // Deklarere variable til at holde brugerdata
         const username = $("#inputUsername").val();
         const password = $("#inputPassword").val();
 
@@ -11,10 +13,8 @@ $(document).ready(() => {
             data = JSON.parse(data);
 
             if (err && err.xhr.status === 401) {
-                $(".form-group").addClass("has-error");
                 return alert("Der er sket en fejl!");
                 console.log(data);
-
             }
             else if (err) {
                 return alert("Der blev ikke fundet et match mellem brugernavn og kodeord");

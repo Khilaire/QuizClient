@@ -1,10 +1,12 @@
 $(document).ready(() => {
 
+    // load navigationsbar for gæster
     SDK.User.loadNavNon();
 
-    // Opret default bruger
+    // Køres hvis gæsten ønsker at oprette en (default) konto
     $("#createUserbtn").on("click", () => {
 
+        // Deklarere variable til at holde brugerdata
         const firstName = $("#inputName").val();
         const surname = $("#inputSurname").val();
         const username = $("#inputUsername").val();
@@ -14,17 +16,14 @@ $(document).ready(() => {
         SDK.User.createUser(firstName, surname, username, password, type, (err, data) => {
             console.log(firstName + surname + username + password + type);
 
-
             if (err && err.xhr.status === 401) {
                 console.log(data)
             }
             else if (err) {
                 console.log("Der er sket en fejl!")
             } else {
-
                 if (!username || !password) {
                     window.alert("Indtast venligst brugernavn og kodeord!");
-
                 } else {
                     alert("Tillykke " + firstName + ", din bruger er blevet oprettet!");
                     window.location.href = ("loginPage.html");
@@ -33,8 +32,10 @@ $(document).ready(() => {
         });
     });
 
+    // Køres hvis en administrator ønsker at oprette en ny (administrator) konto
     $("#createAdmbtn").on("click", () => {
 
+        // Deklarere variable til at holde brugerdata
         const firstName = $("#inputName").val();
         const surname = $("#inputSurname").val();
         const username = $("#inputUsername").val();
@@ -44,17 +45,14 @@ $(document).ready(() => {
         SDK.User.createUser(firstName, surname, username, password, type, (err, data) => {
             console.log(firstName + surname + username + password + type);
 
-
             if (err && err.xhr.status === 401) {
                 console.log(data)
             }
             else if (err) {
                 console.log("Der er sket en fejl!")
             } else {
-
                 if (!username || !password) {
                     window.alert("Indtast venligst brugernavn og kodeord!");
-
                 } else {
                     alert("Succes! " + firstName + " " + surname + " er oprettet som administrator!");
                     window.location.href = ("adminPage.html");

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 
-
     <link rel="stylesheet" href="../lib/css/bootstrap.css">
     <link rel="stylesheet" href="../css/main.css">
 
@@ -13,9 +12,7 @@
 <body>
 
 <div class="container">
-
     <div class="row" id="nav-container"></div>
-
     <div class="row">
         <div class="col-lg-12">
             <!-- Standard Jumbotron-tema benyttes af hensyn til consistency-->
@@ -25,7 +22,6 @@
                     <div class="defaultWelcometxt" id="defaultWelcometxt">
                         <p>Hvilket fag ønsker du at teste dig selv i?</p>
                     </div>
-
                     <div class="courseSelection">
                         <button type="button" class="btn-primary courseSelection" id="dis-button" data-toggle="modal"
                                 data-target="#disModal">Distribuerede Systemer
@@ -39,7 +35,6 @@
                         <button type="button" class="btn-primary courseSelection" id="fin-button" data-toggle="modal"
                                 data-target="#finModal">VØS(3) - Finansiering
                         </button>
-
                         <!-- Modal for distribuerede systemer-->
                         <div class="modal fade" id="disModal" tabindex="-1" role="dialog"
                              aria-labelledby="disModalTitle" aria-hidden="true">
@@ -95,7 +90,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Modal for IT Makroøkonomi-->
                     <div class="modal fade" id="makModal" tabindex="-1" role="dialog" aria-labelledby="makModalTitle"
                          aria-hidden="true">
@@ -123,7 +117,6 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Modal for VØS(3) Finansiering-->
                     <div class="modal fade" id="finModal" tabindex="-1" role="dialog" aria-labelledby="finModalTitle"
                          aria-hidden="true">
@@ -156,14 +149,10 @@
         </div>
     </div>
 </div>
-</div>
-
-</div>
-
 
 <footer class="footer">
-    <div class="container">
-        <p class="text-muted">2017 - Eksamensprojekt i faget, Distribuerede Systemer.</p>
+    <div class="container" align="center">
+        <p class="text-muted">Eksamensprojekt i faget, Distribuerede Systemer.</p>
     </div>
 </footer>
 
@@ -171,9 +160,7 @@
 <script src="../lib/js/bootstrap.js"></script>
 <script src="../js/sdk.js"></script>
 <script src="../js/defaultPage.js"></script>
-<script>
-    SDK.User.loadNavDefault();
-</script>
+<script>SDK.User.loadNavDefault();</script>
 
 </body>
 </html>
