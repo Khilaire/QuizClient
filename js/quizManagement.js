@@ -3,6 +3,8 @@ $(document).ready(() => {
     // load navigationsbar for administrator
     SDK.User.loadNavAdmin();
 
+    const questionId = SDK.getQueryParam("questionId");
+
     // Køres hvis brugeren vælger "Distrubuerede Systemer"
     // Container til at holde data og vise liste over quizzes relateret til DIS
     const $listContainerTbodyDis = $("#listContainerDis");
@@ -250,9 +252,9 @@ $(document).ready(() => {
                 console.log("Der er sket en fejl!", err)
             } else {
                 $("#inputOption").val(""); // tømmer feltet/"resetter"
-                return alert("Din svarmuligheded er gemt - du kan nu tilføje flere");
+                alert("Din svarmuligheded er gemt - du kan nu tilføje flere");
                 console.log("Succes!", data);
-                window.location.href = ("choiceCreation.html?questionId=" + data.questionId + "&quizId=" + data.quizId);
+
             }
         });
     });
@@ -262,9 +264,7 @@ $(document).ready(() => {
 
         // Deklarer variabel til at holde data ifb. oprettelse af spørgsmål
         const quizId = SDK.getQueryParam("quizId");
-
-        return alert("Din svarmulighed er gemt - du bliver nu omridigeret tilbage til at oprette spørgsmål");
-        console.log("Succes!", data);
+        console.log(quizId);
         window.location.href = ("questionCreation.html?quizId=" + quizId);
     });
 
